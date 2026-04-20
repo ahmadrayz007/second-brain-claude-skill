@@ -1,0 +1,25 @@
+{
+  "name": "second-brain-claude-skill",
+  "owner": {
+    "name": "Ahmad Rayis",
+    "url": "https://github.com/ahmadrayz007"
+  },
+  "metadata": {
+    "description": "Auto-logs research, decisions, project progress, meetings, and daily notes into an Obsidian vault. Silent by default; confirms only for net-new ADRs and new research topics."
+  },
+  "plugins": [
+    {
+      "name": "second-brain-claude-skill",
+      "source": "./",
+      "description": "Auto-logs research, decisions, project progress, meetings, and daily notes into an Obsidian vault using consistent conventions.",
+      "version": "0.2.1",
+      "author": {
+        "name": "Ahmad Rayis",
+        "url": "https://github.com/ahmadrayz007"
+      },
+      "homepage": "https://github.com/ahmadrayz007/second-brain-claude-skill",
+      "repository": "https://github.com/ahmadrayz007/second-brain-claude-skill",
+      "license": "MIT"
+    }
+  ]
+}

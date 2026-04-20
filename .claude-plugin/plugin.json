@@ -1,7 +1,7 @@
 {
   "name": "second-brain-claude-skill",
   "description": "Auto-logs research, decisions, project progress, meetings, and daily notes into an Obsidian vault using consistent conventions. Silent by default; confirms only for net-new ADRs and new research topics.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "author": {
     "name": "Ahmad Rayis",
     "url": "https://github.com/ahmadrayz007"
