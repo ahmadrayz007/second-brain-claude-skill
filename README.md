@@ -59,10 +59,10 @@ Swap `~/.claude/skills/` for `.claude/skills/` in the commands above to scope th
 On the first trigger in a new project, the skill will:
 
 1. Walk up from the current directory looking for a `.obsidian/` folder. If found, that's the vault.
-2. If not found, it checks `~/.claude/obsidian-vault-keeper.config.json` for a saved path.
+2. If not found, it checks `~/.claude/second-brain.config.json` for a saved path.
 3. If still not found, it asks you once for the absolute path — and saves it to the config so it never asks again.
 
-You can change the saved path any time by editing `~/.claude/obsidian-vault-keeper.config.json`.
+You can change the saved path any time by editing `~/.claude/second-brain.config.json`.
 
 ## Try it
 

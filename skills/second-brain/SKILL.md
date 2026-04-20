@@ -1,5 +1,5 @@
 ---
-name: obsidian-vault-keeper
+name: second-brain
 description: Automatically logs research findings, decisions (ADR-style), project progress, meeting notes, and daily work into an Obsidian vault using consistent conventions. Activates when the user shares research, commits to a decision, updates project status, describes a meeting, or starts/ends a work session. Resolves the vault path by scanning for a `.obsidian/` folder or a local config file.
 ---
 
@@ -25,12 +25,12 @@ If a message contains multiple triggers, handle the most specific one first (dec
 Before any file write, resolve `VAULT` in this order. Stop at the first hit:
 
 1. **Walk up from CWD.** Starting at the current working directory, walk up to `$HOME`. The parent of any `.obsidian/` folder is the vault. Use that.
-2. **Read config.** Check `~/.claude/obsidian-vault-keeper.config.json` for a `vaultPath` key.
+2. **Read config.** Check `~/.claude/second-brain.config.json` for a `vaultPath` key.
 3. **Ask once.** If nothing resolved, ask the user for the absolute vault path. On reply, persist it:
 
    ```bash
    mkdir -p ~/.claude
-   echo '{"vaultPath": "/absolute/path/to/vault"}' > ~/.claude/obsidian-vault-keeper.config.json
+   echo '{"vaultPath": "/absolute/path/to/vault"}' > ~/.claude/second-brain.config.json
    ```
 
 Never write outside `VAULT`. Never modify the user's existing notes destructively — append or create new files.
@@ -137,7 +137,7 @@ Users can override the mode verbally during a session. Watch for these cues and 
 | "save this" / "log this" (one-shot) | Write regardless of mode. No confirmation. |
 | "don't log that" / "skip that" (one-shot, referring to something just said) | Do not write the inferred note. If already written in this turn, report that it was written and offer to delete. |
 
-Mode overrides are **session-scoped**, not persisted. If the user wants a permanent change, they'll ask — then save it to `~/.claude/obsidian-vault-keeper.config.json` under a `defaultMode` key (`auto` | `mixed` | `manual`).
+Mode overrides are **session-scoped**, not persisted. If the user wants a permanent change, they'll ask — then save it to `~/.claude/second-brain.config.json` under a `defaultMode` key (`auto` | `mixed` | `manual`).
 
 `manual` mode exists only if a user persists it via config: only write when the user explicitly says "save"/"log"/"note this".
 

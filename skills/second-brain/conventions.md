@@ -1,6 +1,6 @@
 # Conventions
 
-The full convention spec for `obsidian-vault-keeper`. Claude follows these when writing to the vault. You can override any of these by telling Claude once — the agent will adapt for the session (and ideally save the override to memory).
+The full convention spec for `second-brain`. Claude follows these when writing to the vault. You can override any of these by telling Claude once — the agent will adapt for the session (and ideally save the override to memory).
 
 ## Frontmatter
 
