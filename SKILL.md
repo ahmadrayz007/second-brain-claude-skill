@@ -56,7 +56,12 @@ VAULT/
 
 ## Step 3 — The 5 scenarios
 
-For every scenario: load the matching template from `templates/`, fill placeholders, confirm the filename + first lines with the user before writing a brand-new file. Silent appends are OK for daily notes.
+**Default write policy** (see `Operating mode` below for how to override):
+
+- **Silent auto-write** for: daily notes (all ops), meeting notes, project status updates, and appends to existing research files. Just write. Report the path after.
+- **Confirm first** for exactly two things: creating a **new ADR file** (Scenario B) and creating a **new research topic file** (Scenario A, first time for that topic). These are the only net-new, semantically heavy files — worth a 2-second confirm because they're forever.
+
+Everything else is too low-stakes to interrupt for. For every scenario: load the matching template from `templates/`, fill placeholders, write, then report the vault-relative path.
 
 ### Scenario A — Research
 
@@ -119,13 +124,30 @@ See `conventions.md` for the full spec. Quick reference:
 - **Filenames:** `YYYY-MM-DD-slug.md` for dated notes (meetings, decisions, daily); `PascalCase.md` or `kebab-case.md` for evergreen (research, project MOCs) — match whatever the vault already uses.
 - **Inbox fallback.** If you cannot classify a snippet, drop it in `Inbox/YYYY-MM-DD-<slug>.md` with a `#inbox` tag — do not force-fit.
 
+## Operating mode
+
+Default: **mixed** — silent auto-write for routine work, confirm only for new ADRs and new research topic files (as specified in Step 3). This is what ships.
+
+Users can override the mode verbally during a session. Watch for these cues and adjust for the rest of the session:
+
+| User says | Behavior |
+|-----------|----------|
+| "auto mode", "quiet mode", "go auto", "stop asking", "just do it" | Disable all confirmations. Write everything silently, including new ADRs and new research files. Still report paths after. |
+| "back to default", "confirm mode", "ask me first" | Restore default mixed behavior. |
+| "save this" / "log this" (one-shot) | Write regardless of mode. No confirmation. |
+| "don't log that" / "skip that" (one-shot, referring to something just said) | Do not write the inferred note. If already written in this turn, report that it was written and offer to delete. |
+
+Mode overrides are **session-scoped**, not persisted. If the user wants a permanent change, they'll ask — then save it to `~/.claude/obsidian-vault-keeper.config.json` under a `defaultMode` key (`auto` | `mixed` | `manual`).
+
+`manual` mode exists only if a user persists it via config: only write when the user explicitly says "save"/"log"/"note this".
+
 ## Behavior rules
 
-- **Confirm before first-time writes to a new folder.** Once confirmed, future writes to that folder don't need confirmation in the same session.
 - **Idempotency.** Before appending to an existing note, scan its content. If the same info is already there, skip or append a timestamp-only diff.
 - **Atomic writes.** One write per tool call — never batch unrelated updates into a single file edit.
 - **Report paths back.** After every write, tell the user the relative path from `VAULT/` so they can `Cmd+O` it.
 - **Never delete.** If something needs to be replaced, mark the old content with `~~strikethrough~~` or move it to an `Archive/` section inside the same note.
+- **False-positive guard.** If unsure whether something qualifies (e.g. user said "maybe we'll try X"), treat it as speculation — do not create a decision or research file. When in doubt, stay silent and let the user ask explicitly.
 
 ## Files in this skill
 
