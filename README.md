@@ -18,6 +18,13 @@ When you're working with Claude and one of these happens, Claude automatically l
 
 Everything uses consistent frontmatter, wikilinks between related notes, and namespaced tags — so Obsidian's graph view and full-text search stay useful as the vault grows.
 
+## Prerequisites
+
+1. **Install Obsidian** — free, cross-platform. Download at [obsidian.md](https://obsidian.md).
+2. **Create a vault** — in Obsidian: `Create new vault` → pick any folder on disk. That folder is your vault (e.g. `~/Documents/MyVault`). The vault can be empty or already in use — the skill appends, never overwrites.
+3. **Install Claude Code or Claude Cowork** — see [claude.com/claude-code](https://claude.com/claude-code).
+4. **Git** — needed for installing the skill via `git clone`.
+
 ## Install
 
 ### Option 1 — Claude Code (global, all projects)
