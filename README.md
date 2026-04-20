@@ -27,28 +27,32 @@ Everything uses consistent frontmatter, wikilinks between related notes, and nam
 
 ## Install
 
-### Option 1 — Claude Code (global, all projects)
+### Recommended — Claude Code plugin (two commands)
+
+In Claude Code, run:
+
+```
+/plugin marketplace add https://github.com/ahmadrayz007/second-brain-claude-skill
+/plugin install second-brain-claude-skill
+```
+
+That's it. The skill auto-activates on context (no slash command needed). Updates via `/plugin update second-brain-claude-skill`.
+
+### Alternative — manual install (git clone)
+
+If you prefer to manage the skill files yourself:
 
 ```bash
 mkdir -p ~/.claude/skills
-git clone https://github.com/ahmadrayz007/second-brain-claude-skill.git ~/.claude/skills/obsidian-vault-keeper
+git clone https://github.com/ahmadrayz007/second-brain-claude-skill.git /tmp/sbcs
+cp -r /tmp/sbcs/skills/second-brain ~/.claude/skills/second-brain
 ```
 
-Restart Claude Code. The skill activates automatically when its triggers match.
+Restart Claude Code. Works in both Claude Code and Claude Cowork.
 
-### Option 2 — Claude Code (per-project)
+### Per-project install
 
-```bash
-mkdir -p .claude/skills
-git clone https://github.com/ahmadrayz007/second-brain-claude-skill.git .claude/skills/obsidian-vault-keeper
-```
-
-Keeps the skill scoped to one project/vault.
-
-### Option 3 — Claude Cowork (desktop)
-
-1. Clone the repo anywhere.
-2. In Cowork: Settings → Skills → Add local skill → point to the cloned folder.
+Swap `~/.claude/skills/` for `.claude/skills/` in the commands above to scope the skill to one repo/vault instead of globally.
 
 ## First run
 
@@ -74,7 +78,7 @@ Claude will confirm the filename and preview before creating any new file.
 
 ## Conventions
 
-Every note follows the same minimal contract: YAML frontmatter with `type`, `created`, `updated`, `tags`; wikilinks `[[like this]]` for entities that have or could have their own note; namespaced tags like `#research/competitor`, `#decision/tech`, `#project/datamapan`. Full spec in [`conventions.md`](conventions.md).
+Every note follows the same minimal contract: YAML frontmatter with `type`, `created`, `updated`, `tags`; wikilinks `[[like this]]` for entities that have or could have their own note; namespaced tags like `#research/competitor`, `#decision/tech`, `#project/datamapan`. Full spec in [`skills/second-brain/conventions.md`](skills/second-brain/conventions.md).
 
 You can override any convention by telling Claude once — the agent adapts for the session.
 
@@ -82,16 +86,21 @@ You can override any convention by telling Claude once — the agent adapts for 
 
 ```
 second-brain-claude-skill/
-├── SKILL.md              # main skill file (triggers + instructions)
-├── conventions.md        # full convention reference
-├── templates/
-│   ├── research.md
-│   ├── decision.md
-│   ├── project-status.md
-│   ├── meeting.md
-│   └── daily.md
-├── examples/             # filled-out example notes
-└── README.md             # this file
+├── .claude-plugin/
+│   └── plugin.json              # plugin manifest (enables /plugin install)
+├── skills/
+│   └── second-brain/
+│       ├── SKILL.md             # main skill file (triggers + instructions)
+│       ├── conventions.md       # full convention reference
+│       ├── templates/
+│       │   ├── research.md
+│       │   ├── decision.md
+│       │   ├── project-status.md
+│       │   ├── meeting.md
+│       │   └── daily.md
+│       └── examples/            # filled-out example notes
+├── README.md                    # this file
+└── LICENSE                      # MIT
 ```
 
 ## Philosophy
